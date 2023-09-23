@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:json_parse_demo/HttpHelper.dart';
@@ -8,6 +9,7 @@ import 'package:json_parse_demo/model/todos.dart';
 import 'package:json_parse_demo/model/users_list.dart';
 import 'package:json_parse_demo/peoples.dart';
 import 'package:json_parse_demo/pixabay_page.dart';
+import 'package:json_parse_demo/post_api_demo.dart';
 import 'package:json_parse_demo/student.dart';
 import 'package:http/http.dart' as http;
 
@@ -118,7 +120,11 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: () async {
           // Map<String, dynamic> respose = await helper.httpGet("todos/1");
           // var todos = Todos.fromJson(respose);
-
+          Navigator.push(context, MaterialPageRoute(
+            builder: (context) {
+              return PostApiDemo();
+            },
+          ));
         },
         tooltip: 'Increment',
         child: const Icon(Icons.add),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:json_parse_demo/full_screen.dart';
 import 'package:json_parse_demo/main.dart';
 import 'package:json_parse_demo/model/pixabay_model.dart';
 
@@ -39,28 +40,35 @@ class _PixabayPageState extends State<PixabayPage> {
                 itemCount: listHit.length,
                 itemBuilder: (context, index) {
                   Hit hit = listHit.toList()[index];
-                  return Container(
-                    height: 250,
-                    margin: EdgeInsets.all(10),
-                    clipBehavior: Clip.antiAlias,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Stack(
-                      children: [
-                        Positioned.fill(
-                          child: Image.network(hit.largeImageUrl ?? "", fit: BoxFit.cover),
-                        ),
-                        Positioned(
-                          top: 15,
-                          left: 15,
-                          child: CircleAvatar(
-                            radius: 28,
-                            backgroundImage: NetworkImage(hit.userImageUrl ?? ""),
-                            child: Text("$index"),
+                  return InkWell(
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) {
+                        return FullScreen(url: hit.largeImageUrl??"");
+                      },));
+                    },
+                    child: Container(
+                      height: 250,
+                      margin: EdgeInsets.all(10),
+                      clipBehavior: Clip.antiAlias,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Stack(
+                        children: [
+                          Positioned.fill(
+                            child: Image.network(hit.largeImageUrl ?? "", fit: BoxFit.cover),
                           ),
-                        )
-                      ],
+                          Positioned(
+                            top: 15,
+                            left: 15,
+                            child: CircleAvatar(
+                              radius: 28,
+                              backgroundImage: NetworkImage(hit.userImageUrl ?? ""),
+                              child: Text("$index"),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   );
                 },
